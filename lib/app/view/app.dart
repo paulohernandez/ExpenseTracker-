@@ -1,4 +1,4 @@
-import 'package:expense_tracker/counter/counter.dart';
+import 'package:expense_tracker/features/home/presentation/widgets/home.dart';
 import 'package:expense_tracker/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,7 @@ class App extends StatelessWidget {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      home: const HomePage(),
     );
   }
 }

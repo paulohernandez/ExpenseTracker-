@@ -1,5 +1,5 @@
 import 'package:expense_tracker/features/home/presentation/widgets/components/card_details.dart';
-import 'package:expense_tracker/features/home/presentation/widgets/components/transactions_widget.dart';
+import 'package:expense_tracker/features/home/presentation/widgets/components/transactions_list.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -58,7 +58,7 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
                 IconButton(
@@ -76,7 +76,7 @@ class HomePage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const TransactionsWidget(),
+            const TransactionsLists(),
           ],
         ),
       ),

@@ -1,29 +1,52 @@
 import 'dart:math';
 
 import 'package:expense_tracker/features/home/presentation/widgets/home.dart';
+import 'package:expense_tracker/features/transactions/presentation/widgets/transactions_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   const MainPage({super.key});
+
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  late Color selectedColor = Theme.of(context).colorScheme.primary;
+  late Color unSelectedColor = Colors.grey;
+  int index = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: const HomePage(),
+      body: index == 0
+          ? const HomePage()
+          : const TransactionsWidget(),
       bottomNavigationBar: ClipRRect(
         borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
         child: BottomNavigationBar(
+          onTap: (value) {
+            setState(() {
+              index = value;
+            });
+          },
           showSelectedLabels: false,
           showUnselectedLabels: false,
-          items: const [
+          items: [
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.home),
+              icon: Icon(
+                CupertinoIcons.home,
+                color: index == 0 ? selectedColor : unSelectedColor,
+              ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.graph_square_fill),
+              icon: Icon(
+                CupertinoIcons.graph_square_fill,
+                color: index == 1 ? selectedColor : unSelectedColor,
+              ),
               label: 'Stats',
             ),
           ],

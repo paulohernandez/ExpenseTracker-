@@ -1,38 +1,84 @@
-import 'package:flutter/cupertino.dart';
+import 'package:expense_tracker/features/home/presentation/widgets/components/card_details.dart';
+import 'package:expense_tracker/features/home/presentation/widgets/components/transactions_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-      ),
-      body: const Center(child: Text('helloworld')),
-      bottomNavigationBar: ClipRRect(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
-        child: BottomNavigationBar(
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.home),
-              label: 'Home',
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.yellow[700],
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                        const FaIcon(
+                          FontAwesomeIcons.solidUser,
+                          color: Colors.yellow,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Welcome!',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.outline,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12,
+                          ),
+                        ),
+                        Text(
+                          'John Doe',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onSurface,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const FaIcon(
+                    FontAwesomeIcons.gear,
+                  ),
+                ),
+              ],
             ),
-            BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.graph_square_fill),
-              label: 'Stats',
+            const SizedBox(
+              height: 20,
             ),
+            const CardDetails(),
+            const SizedBox(
+              height: 20,
+            ),
+            const TransactionsWidget(),
           ],
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        shape: const CircleBorder(),
-        child: const Icon(CupertinoIcons.plus),
       ),
     );
   }

@@ -1,3 +1,5 @@
+import 'package:expense_tracker/features/transactions/presentation/widgets/components/chart.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class TransactionsWidget extends StatelessWidget {
@@ -24,11 +26,11 @@ class TransactionsWidget extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 20,),
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.width,
-              color: Colors.red,
-            )
+              child:Chart(),
+            ),
           ],
         ),
       ),

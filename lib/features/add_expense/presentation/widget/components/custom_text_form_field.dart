@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
@@ -10,6 +9,7 @@ class CustomTextFormField extends StatelessWidget {
     this.textController,
     this.bottomMargin,
     this.onTap,
+    this.borderRadius,
     super.key,
   });
 
@@ -19,6 +19,7 @@ class CustomTextFormField extends StatelessWidget {
   final IconData? prefixIcon;
   final IconButton? suffixIcon;
   final double? bottomMargin;
+  final double? borderRadius;
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,12 @@ class CustomTextFormField extends StatelessWidget {
           suffixIcon: suffixIcon,
           border: OutlineInputBorder(
             borderSide: BorderSide.none,
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: borderRadius == null || borderRadius == 10
+                ? BorderRadius.circular(10)
+                : BorderRadius.vertical(
+                    top: const Radius.circular(10),
+                    bottom: Radius.circular(borderRadius ?? 10),
+                  ),
           ),
         ),
       ),

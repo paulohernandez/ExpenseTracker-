@@ -29,7 +29,7 @@ class TransactionsWidget extends StatelessWidget {
             SizedBox(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.width,
-              child:Chart(),
+              child:const Chart(),
             ),
           ],
         ),

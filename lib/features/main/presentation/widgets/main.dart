@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:expense_tracker/features/add_expense/presentation/widget/add_expense.dart';
 import 'package:expense_tracker/features/home/presentation/widgets/home.dart';
 import 'package:expense_tracker/features/transactions/presentation/widgets/transactions_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,9 +22,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: index == 0
-          ? const HomePage()
-          : const TransactionsWidget(),
+      body: index == 0 ? const HomePage() : const TransactionsWidget(),
       bottomNavigationBar: ClipRRect(
         borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
         child: BottomNavigationBar(
@@ -54,7 +53,14 @@ class _MainPageState extends State<MainPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute<void>(
+              builder: (BuildContext context) => const AddExpense(),
+            ),
+          );
+        },
         shape: const CircleBorder(),
         child: Container(
           width: 60,

@@ -70,11 +70,11 @@ class HomePage extends StatelessWidget {
               ],
             ),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             const CardDetails(),
             const SizedBox(
-              height: 20,
+              height: 40,
             ),
             const TransactionsLists(),
           ],

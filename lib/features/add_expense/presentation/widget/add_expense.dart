@@ -1,31 +1,17 @@
-import 'dart:math';
 import 'package:expense_tracker/features/add_expense/presentation/widget/components/category_dialog.dart';
 import 'package:expense_tracker/features/add_expense/presentation/widget/components/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
-class AddExpense extends StatefulWidget {
+class AddExpense extends StatelessWidget {
   const AddExpense({super.key});
 
   @override
-  State<AddExpense> createState() => _AddExpenseState();
-}
-
-class _AddExpenseState extends State<AddExpense> {
-  TextEditingController expenseController = TextEditingController();
-  TextEditingController categoryController = TextEditingController();
-  TextEditingController dateController = TextEditingController();
-  TextEditingController noteController = TextEditingController();
-
-  @override
-  void initState() {
-    dateController.text = DateFormat('dd/MM/yyyy').format(DateTime.now());
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final dateController = TextEditingController();
+    final noteController = TextEditingController();
+
     return GestureDetector(
       onTap: FocusScope.of(context).unfocus,
       child: Scaffold(
@@ -82,15 +68,15 @@ class _AddExpenseState extends State<AddExpense> {
                 height: 30,
               ),
               CustomTextFormField(
+                onTap: () {
+                  categoryDialog(context);
+                },
                 readOnly: true,
                 prefixIcon: FontAwesomeIcons.solidRectangleList,
                 hintText: 'Category',
-                textController: categoryController,
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    categoryDialog(context);
-                  },
-                  icon: const Icon(
+                suffixIcon: const IconButton(
+                  onPressed: null,
+                  icon: Icon(
                     FontAwesomeIcons.plus,
                     size: 15,
                     color: Colors.grey,
@@ -130,14 +116,7 @@ class _AddExpenseState extends State<AddExpense> {
                     height: kToolbarHeight,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
-                      gradient: LinearGradient(
-                        colors: [
-                          Theme.of(context).colorScheme.primary,
-                          Theme.of(context).colorScheme.secondary,
-                          Theme.of(context).colorScheme.tertiary,
-                        ],
-                        transform: const GradientRotation(pi / 4),
-                      ),
+                      color: Colors.black,
                     ),
                     child: TextButton(
                       style: TextButton.styleFrom(

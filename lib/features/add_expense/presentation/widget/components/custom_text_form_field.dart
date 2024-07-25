@@ -10,6 +10,8 @@ class CustomTextFormField extends StatelessWidget {
     this.bottomMargin,
     this.onTap,
     this.borderRadius,
+    this.selectedColor,
+    this.onChange,
     super.key,
   });
 
@@ -20,20 +22,23 @@ class CustomTextFormField extends StatelessWidget {
   final IconButton? suffixIcon;
   final double? bottomMargin;
   final double? borderRadius;
+  final Color? selectedColor;
   final void Function()? onTap;
+  final void Function(String)? onChange;
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: bottomMargin ?? 20),
       width: MediaQuery.of(context).size.width * .9,
       child: TextFormField(
+        onChanged: onChange,
         controller: textController,
         readOnly: readOnly,
         onTap: onTap,
         decoration: InputDecoration(
           isDense: true,
           filled: true,
-          fillColor: Colors.white,
+          fillColor: selectedColor ?? Colors.white,
           prefixIcon: prefixIcon != null
               ? Icon(
                   prefixIcon,

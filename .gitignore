@@ -83,10 +83,11 @@ unlinked_spec.ds
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
 
+lib/firebase_options.dart
 # Google services
 configurations
 **/firebase.json
-**/firebase_options.dart
+/firebase_options.dart
 **/firebase_options**.dart
 **/google-services.json
 **/GoogleService-Info.plist

@@ -1,10 +1,14 @@
 import 'dart:math';
 
+import 'package:expense_repository/expense_repository.dart';
+import 'package:expense_tracker/features/add_expense/presentation/bloc/add_expense_bloc.dart';
 import 'package:expense_tracker/features/add_expense/presentation/widget/add_expense.dart';
 import 'package:expense_tracker/features/home/presentation/widgets/home.dart';
 import 'package:expense_tracker/features/transactions/presentation/widgets/transactions_widget.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -57,7 +61,11 @@ class _MainPageState extends State<MainPage> {
           Navigator.push(
             context,
             MaterialPageRoute<void>(
-              builder: (BuildContext context) => const AddExpense(),
+              builder: (BuildContext context) => BlocProvider(
+                create: (context) =>
+                    AddExpenseBloc(FirebaseExpenseRepository()),
+                child: const AddExpense(),
+              ),
             ),
           );
         },

@@ -2,32 +2,38 @@ import 'dart:math';
 
 import 'package:expense_repository/expense_repository.dart';
 import 'package:expense_tracker/features/add_expense/data/sources/add_expense_data_source.dart';
-import 'package:expense_tracker/features/add_expense/presentation/bloc/add_expense_bloc.dart';
+import 'package:expense_tracker/features/add_expense/presentation/bloc/create_category_bloc/create_category_bloc.dart';
 import 'package:expense_tracker/features/add_expense/presentation/widget/components/change_color.dart';
 import 'package:expense_tracker/features/add_expense/presentation/widget/components/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:uuid/uuid.dart';
 
 TextEditingController nameController = TextEditingController();
 Color color = Colors.white;
 bool isCategoryIconListVisible = false;
 double radius = 10;
-IconData selectedIcon = FontAwesomeIcons.s;
-Future<void> categoryDialog(BuildContext context) {
-  return showDialog<AlertDialog>(
+IconData selectedIcon = Icons.add;
+Category category = Category.emptyCategory;
+Future categoryDialog(BuildContext context) async {
+  return showDialog(
     context: context,
     builder: (ctx) {
       final icons = AddExpenseDataSource().icons;
       return BlocProvider.value(
-        value: context.read<AddExpenseBloc>(),
-        child: BlocBuilder<AddExpenseBloc, AddExpenseState>(
+        value: context.read<CreateCategoryBloc>(),
+        child: BlocBuilder<CreateCategoryBloc, CreateCategoryState>(
           builder: (context, state) {
-            if (state is CategoryValueState) {
+            if (state is AddCategorySuccess) {
+              Navigator.pop(ctx, category);
+            } else if (state is CategoryValueState) {
+              nameController.text = state.name;
               color = state.color;
               isCategoryIconListVisible = state.isIconListVisible;
               selectedIcon = state.icon;
             }
+
             return AlertDialog(
               title: const Text(
                 'Choose Category',
@@ -40,14 +46,14 @@ Future<void> categoryDialog(BuildContext context) {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     CustomTextFormField(
-                      onTap: (){
+                      onTap: () {
                         context
-                            .read<AddExpenseBloc>()
+                            .read<CreateCategoryBloc>()
                             .add(const ChangeNameEvent(''));
                       },
                       onChange: (value) {
                         context
-                            .read<AddExpenseBloc>()
+                            .read<CreateCategoryBloc>()
                             .add(ChangeNameEvent(value));
                       },
                       textController: nameController,
@@ -57,12 +63,11 @@ Future<void> categoryDialog(BuildContext context) {
                     CustomTextFormField(
                       onTap: () {
                         context
-                            .read<AddExpenseBloc>()
+                            .read<CreateCategoryBloc>()
                             .add(ChangeIconEvent(selectedIcon));
                       },
-                      prefixIcon: selectedIcon != FontAwesomeIcons.s
-                          ? selectedIcon
-                          : null,
+                      prefixIcon:
+                          selectedIcon != Icons.add ? selectedIcon : null,
                       bottomMargin: 0,
                       borderRadius: radius,
                       hintText: 'Icon',
@@ -96,7 +101,7 @@ Future<void> categoryDialog(BuildContext context) {
                               return GestureDetector(
                                 onTap: () {
                                   context
-                                      .read<AddExpenseBloc>()
+                                      .read<CreateCategoryBloc>()
                                       .add(ChangeIconEvent(icons[index]));
                                 },
                                 child: Container(
@@ -162,27 +167,25 @@ Future<void> categoryDialog(BuildContext context) {
                           splashFactory: NoSplash.splashFactory,
                         ),
                         onPressed: () {
-                          final category = Category(
-                            categoryId: '0129',
-                            name: nameController.text,
-                            totalExpense: 45,
-                            icon: selectedIcon.toString(),
-                            color: 'white',
-                          );
-                          context.read<AddExpenseBloc>().add(
-                                CreateCategoryEvent(
+                          category.categoryId = const Uuid().v1();
+                          category.name = nameController.text;
+                          category.icon = selectedIcon.codePoint;
+                          category.color = color.value;
+                          context.read<CreateCategoryBloc>().add(
+                                CreateCategory(
                                   category,
                                 ),
                               );
-                          Navigator.pop(context);
                         },
-                        child: const Text(
-                          'Save',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                          ),
-                        ),
+                        child: state is AddCategoryLoading
+                            ? const CircularProgressIndicator()
+                            : const Text(
+                                'Save',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                ),
+                              ),
                       ),
                     ),
                   ],

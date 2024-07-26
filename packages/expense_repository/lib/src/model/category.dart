@@ -1,7 +1,7 @@
 import '../entities/entities.dart';
 
 class Category {
-  const Category({
+  Category({
     required this.categoryId,
     required this.name,
     required this.totalExpense,
@@ -9,12 +9,12 @@ class Category {
     required this.color,
   });
 
-  static const emptyCategory = Category(
+  static final emptyCategory = Category(
     categoryId: '',
     name: '',
     totalExpense: 0,
-    icon: '',
-    color: '',
+    icon: 0,
+    color: 0,
   );
 
   CategoryEntity toEntity() {
@@ -37,9 +37,9 @@ class Category {
     );
   }
 
-  final String categoryId;
-  final String name;
-  final int totalExpense;
-  final String icon;
-  final String color;
+  String categoryId;
+  String name;
+  int totalExpense;
+  int icon;
+  int color;
 }

@@ -3,11 +3,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AddExpenseDataSource {
   List<IconData> icons = [
-    FontAwesomeIcons.plane,
-    FontAwesomeIcons.utensils,
-    FontAwesomeIcons.football,
-    FontAwesomeIcons.music,
-    FontAwesomeIcons.laptop,
-    FontAwesomeIcons.cartShopping,
+    Icons.airplanemode_active,
+    Icons.fastfood,
+    Icons.sports_football,
+    Icons.headphones,
+    Icons.laptop,
+    Icons.shopping_bag,
   ];
 }

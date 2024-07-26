@@ -10,8 +10,8 @@ class CategoryEntity {
   String categoryId;
   String name;
   int totalExpense;
-  String icon;
-  String color;
+  int icon;
+  int color;
 
   Map<String, Object?> toDocument() {
     return {
@@ -28,8 +28,8 @@ class CategoryEntity {
       categoryId: doc['categoryId'] as String,
       name: doc['name'] as String,
       totalExpense: doc['totalExpense'] as int,
-      icon: doc['icon'] as String,
-      color: doc['color'] as String,
+      icon: doc['icon'] as int,
+      color: doc['color'] as int,
     );
   }
 }

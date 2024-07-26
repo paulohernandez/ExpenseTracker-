@@ -1,4 +1,4 @@
-import 'package:expense_tracker/features/add_expense/presentation/bloc/add_expense_bloc.dart';
+import 'package:expense_tracker/features/add_expense/presentation/bloc/create_category_bloc/create_category_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
@@ -8,8 +8,8 @@ Future<void> changeColor(BuildContext context) {
     context: context,
     builder: (ctxChangeColor) {
       return BlocProvider.value(
-        value: context.read<AddExpenseBloc>(),
-        child: BlocBuilder<AddExpenseBloc, AddExpenseState>(
+        value: context.read<CreateCategoryBloc>(),
+        child: BlocBuilder<CreateCategoryBloc, CreateCategoryState>(
           builder: (context, state) {
             var color = Colors.white;
             if (state is CategoryValueState) {
@@ -23,7 +23,7 @@ Future<void> changeColor(BuildContext context) {
                     pickerColor: color,
                     onColorChanged: (color) {
                       context
-                          .read<AddExpenseBloc>()
+                          .read<CreateCategoryBloc>()
                           .add(ChangeColorEvent(color));
                     },
                   ),

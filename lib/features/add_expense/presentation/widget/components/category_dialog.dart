@@ -16,7 +16,7 @@ bool isCategoryIconListVisible = false;
 double radius = 10;
 IconData selectedIcon = Icons.add;
 Category category = Category.emptyCategory;
-Future categoryDialog(BuildContext context) async {
+Future<dynamic> categoryDialog(BuildContext context) async {
   return showDialog(
     context: context,
     builder: (ctx) {
@@ -26,7 +26,7 @@ Future categoryDialog(BuildContext context) async {
         child: BlocBuilder<CreateCategoryBloc, CreateCategoryState>(
           builder: (context, state) {
             if (state is AddCategorySuccess) {
-              Navigator.pop(ctx, category);
+              Navigator.pop(ctx , true);
             } else if (state is CategoryValueState) {
               nameController.text = state.name;
               color = state.color;

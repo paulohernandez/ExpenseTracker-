@@ -8,3 +8,13 @@ sealed class GetCategoriesEvent extends Equatable {
 }
 
 class GetCategories extends GetCategoriesEvent {}
+
+class GetSingleCategory extends GetCategoriesEvent {
+  const GetSingleCategory(this.category);
+  
+  final Category category;
+
+  @override
+  List<Object?> get props => [];
+}
+

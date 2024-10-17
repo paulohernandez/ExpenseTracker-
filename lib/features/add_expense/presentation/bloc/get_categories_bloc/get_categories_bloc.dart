@@ -19,6 +19,9 @@ class GetCategoriesBloc extends Bloc<GetCategoriesEvent, GetCategoriesState> {
         log(e.toString());
       }
     });
+    on<GetSingleCategory>((event,emit) async{
+      emit(ChangeCategoryState(event.category));
+    });
   }
 
   final ExpenseRepository expenseRepository;

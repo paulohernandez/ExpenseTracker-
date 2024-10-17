@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:expense_repository/expense_repository.dart';
@@ -67,9 +69,19 @@ class CreateCategoryBloc
     });
     on<CreateCategory>((event, emit) async {
       emit(AddCategoryLoading());
-      await expenseRepository.createCategory(event.category);
-      await Future<void>.delayed(const Duration(seconds: 2));
-      emit(AddCategorySuccess());
+      try {
+        await expenseRepository.createCategory(event.category);
+        await Future<void>.delayed(const Duration(seconds: 2));
+        emit(AddCategorySuccess());
+      } catch (e) {
+        log('$e');
+      }
+    });
+
+    on<tappedButtonGastosPaMore>((event, emit) async {
+      await expenseRepository.readFeedBack();
+      // await expenseRepository.createExpense(event.expense);
+      // emit(AddCategorySuccess());
     });
   }
   final ExpenseRepository expenseRepository;

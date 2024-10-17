@@ -6,10 +6,7 @@ sealed class CreateCategoryState extends Equatable {
   List<Object> get props => [];
 }
 
-final class CreateCategoryInitial extends CreateCategoryState {
-  @override
-  List<Object> get props => [];
-}
+final class CreateCategoryInitial extends CreateCategoryState {}
 
 class AddCategorySuccess extends CreateCategoryState {}
 
@@ -30,5 +27,5 @@ class CategoryValueState extends CreateCategoryState {
   final bool isIconListVisible;
 
   @override
-  List<Object> get props => [name, color, icon ,isIconListVisible];
+  List<Object> get props => [name, color, icon, isIconListVisible];
 }

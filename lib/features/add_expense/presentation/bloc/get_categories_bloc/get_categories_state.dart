@@ -17,5 +17,13 @@ class GetCategoriesSuccess extends GetCategoriesState {
   final List<Category> categories;
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [categories];
+}
+
+class ChangeCategoryState extends GetCategoriesState {
+  const ChangeCategoryState(this.category);
+  final Category category;
+
+  @override
+  List<Object> get props => [category];
 }

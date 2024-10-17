@@ -42,5 +42,14 @@ class CreateCategory extends CreateCategoryEvent {
   List<Object?> get props => [category];
 }
 
+class tappedButtonGastosPaMore extends CreateCategoryEvent{
+  const tappedButtonGastosPaMore(this.expense);
+  final Expense expense;
+
+  @override
+  List<Object?> get props => [expense];
+
+}
+
 class ChangeCategoryDefaultValue extends CreateCategoryEvent{}
 

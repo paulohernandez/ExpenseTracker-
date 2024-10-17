@@ -6,6 +6,7 @@ class FirebaseExpenseRepository implements ExpenseRepository {
   final categoriesCollection =
       FirebaseFirestore.instance.collection('categories');
   final expenseCollection = FirebaseFirestore.instance.collection('expense');
+  final feedBackCollection = FirebaseFirestore.instance.collection('feedBack');
   @override
   Future<void> createCategory(Category category) async {
     try {
@@ -30,5 +31,30 @@ class FirebaseExpenseRepository implements ExpenseRepository {
       log(e.toString());
       rethrow;
     }
+  }
+
+  @override
+  Future<dynamic> createExpense(Expense expense) async {
+    try {
+      DocumentSnapshot expenseExists =
+          await expenseCollection.doc(expense.id).get();
+      if (expenseExists.exists) {
+        return {'response': 'Expense Exits'};
+      }
+      await expenseCollection.doc(expense.id).set(expense.toJson());
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
+  }
+
+  @override
+  Future readFeedBack() async {
+    print('heree');
+    await feedBackCollection.get().then((value) {
+      for (var i in value.docs) {
+        print('${i.id} => ${i.data()}');
+      }
+    });
   }
 }

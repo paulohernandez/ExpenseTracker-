@@ -9,7 +9,7 @@ environment:
 dependencies:
   bloc: ^8.1.4
   cupertino_icons: 1.0.8
-  equatable: 2.0.5
+  equatable: 2.0.6
   expense_repository:
     path: packages/expense_repository
   firebase_core: 2.32.0
